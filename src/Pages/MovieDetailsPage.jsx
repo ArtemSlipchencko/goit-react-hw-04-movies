@@ -21,7 +21,7 @@ class MovieDetailsPage extends Component {
     }
 
     handleGoBack = () => {
-        this.props.history.push(this.props.location.state)
+        this.props.history.push(this.props.location.state.from)
     }
 
     render() {
@@ -51,11 +51,17 @@ class MovieDetailsPage extends Component {
                     <p>{film ? film.overview : null}</p>
                     <Link to={{
                         pathname: `${this.props.match.url}/cast`,
-                        state: this.props.match.params.movieId
+                        state: {
+                            movieId: this.props.match.params.movieId,
+                            from: this.props.location.state.from
+                        }
                     }}>Cast/</Link>
                     <Link to={{
                         pathname: `${this.props.match.url}/reviews`,
-                        state: this.props.match.params.movieId
+                        state: {
+                            movieId: this.props.match.params.movieId,
+                            from: this.props.location.state.from
+                        }
                     }}>/Reviews</Link>
 
                     <Route exact path="/movies/:movieId/cast" component={Cast} />
