@@ -15,10 +15,6 @@ class HomePage extends Component {
     render() {
         return (
             <>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/movies">Movies</Link></li>
-                </ul>
                 <h1>Home</h1>
                 <ul>
                     {

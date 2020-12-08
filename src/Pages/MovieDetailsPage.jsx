@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import fetchFilms from '../service/API.js';
 import {Route, Link} from 'react-router-dom';
-import Cast from '../Components/Cast/Cast';
-import Reviews from '../Components/Reviews/Reviews';
+import Cast from '../components/Cast/Cast';
+import Reviews from '../components/Reviews/Reviews';
 import getGenres from '../service/genres.js';
 
 class MovieDetailsPage extends Component {

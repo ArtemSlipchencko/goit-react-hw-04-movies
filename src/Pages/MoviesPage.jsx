@@ -13,8 +13,31 @@ class MoviesPage extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const {query} = this.state;
+        
         queryFetch(query).then(res => this.setState({films: res.data.results}));
+        this.props.history.push({
+            pathname: '/movies',
+            search: query
+        });
     };
+
+    componentDidMount() {
+        const query = this.props.history.location.search;
+
+        if(query) {
+            queryFetch(query).then(res => this.setState({films: res.data.results}));
+        this.props.history.push({
+            pathname: '/movies',
+            search: query
+        });
+        }
+
+        queryFetch(query).then(res => this.setState({films: res.data.results}));
+        this.props.history.push({
+            pathname: '/movies',
+            search: query
+        });
+    }
 
     handleChange = ({target}) => {
         this.setState({query: target.value})
@@ -23,10 +46,6 @@ class MoviesPage extends Component {
     render() {
         return (
             <>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/movies">Movies</Link></li>
-                </ul>
                 <h1>Movies</h1>
                 <form onSubmit={this.handleSubmit} >
                     <input type="text" onChange={this.handleChange} value={this.state.query} />
@@ -39,7 +58,7 @@ class MoviesPage extends Component {
                                 <li key={el.id}>
                                     <Link to={{
                                         pathname: `/movies/${el.id}`,
-                                        state: {from: this.props.match.url}
+                                        state: {from: `/movies${this.props.history.location.search}`}
                                     }}>{el.title}</Link>
                                 </li>
                             )
